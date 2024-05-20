@@ -1,6 +1,5 @@
-# dotfiles
+# screenshot
 
-My macOS configuration.
 ![screenshot](/screenshot/screenshot.png)
 ![screenshot2](/screenshot/screenshot2.png)
 
