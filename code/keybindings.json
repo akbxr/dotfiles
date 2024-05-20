@@ -1,0 +1,151 @@
+[
+  // Quick Open
+  {
+    "key": "tab",
+    "command": "workbench.action.quickOpenNavigateNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "cmd+alt+k",
+    "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
+    "when": "inQuickOpen"
+  },
+  // {
+  //   "key": "shift+enter",
+  //   "command": "github.copilot.acceptPanelSolution",
+  //   "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  // },
+  {
+    "key": "shift+j",
+    "command": "selectnextsuggestion",
+    "when": "editortextfocus && suggestwidgetmultiplesuggestions && suggestwidgetvisible"
+  },
+  {
+    "key": "shift+tab",
+    "command": "selectPrevSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    "key": "cmd+p",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "shift+meta+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "ctrl+cmd+f",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "shift+meta+d",
+    "command": "deleteFile",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+delete",
+    "command": "-deleteFile",
+    "when": "filesExplorerFocus && foldersViewVisible && !explorerResourceReadonly && !inputFocus"
+  },
+  // NAVIGATION TERM
+  {
+    "key": "ctrl+shift+k",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+t",
+    "command": "workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+cmd+t",
+    "command": "workbench.action.terminal.new",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+d",
+    "command": "workbench.action.terminal.killActiveTab",
+    "when": "terminalFocus"
+  },
+  // FILE TREE
+  {
+    "command": "workbench.action.toggleSidebarVisibility",
+    "key": "ctrl+shift+e",
+    "when": "editorTextFocus"
+  },
+  {
+    "command": "workbench.files.action.focusFilesExplorer",
+    "key": "ctrl+e",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "command": "renameFile",
+    "key": "r",
+    // "when": "filesExplorerFocus && !inputFocus"
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "shift+n",
+    "command": "explorer.newFolder",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.newWindow",
+    "when": "!explorerViewletFocus"
+  },
+  {
+    "command": "deleteFile",
+    "key": "d",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  // copilot chat
+  {
+    "key": "ctrl+i",
+    "command": "workbench.panel.chatSidebar"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  // hide activity bar
+  {
+    "key": "ctrl+alt+q",
+    "command": "workbench.action.toggleActivityBarVisibility"
+  },
+  // hide menu bar
+  {
+    "key": "ctrl+alt+w",
+    "command": "workbench.action.toggleMenuBar"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "-workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "alt+i",
+    "command": "inlineChat.start",
+    "when": "inlineChatHasProvider && !editorReadonly"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-inlineChat.start",
+    "when": "inlineChatHasProvider && !editorReadonly"
+  }
+]

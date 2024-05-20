@@ -1,0 +1,33 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "theme": "Tokyo Night Storm",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "vim_mode": true,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
+  "show_copilot_suggestions": true,
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "ui_font_family": "JetBrainsMono Nerd Font",
+  "show_line_numbers": true,
+  "relative_line_numbers": true,
+  "tab_size": 2,
+  "shell": "zsh",
+  "vim": {
+    // "always": use system clipboard
+    // "never": don't use system clipboard
+    // "on_yank": use system clipboard for yank operations
+    "use_system_clipboard": "always",
+    // Lets `f` and `t` motions extend across multiple lines
+    "use_multiline_find": true
+  }
+}

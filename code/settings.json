@@ -1,0 +1,260 @@
+{
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.verticalScrollbarSize": 0,
+  "security.workspace.trust.startupPrompt": "never",
+  "extensions.autoUpdate": true,
+  "workbench.statusBar.visible": true,
+  "terminal.external.linuxExec": "alacritty",
+  "terminal.explorerKind": "both",
+  "terminal.sourceControlRepositoriesKind": "both",
+  "telemetry.telemetryLevel": "off",
+  "editor.fontSize": 15,
+  "terminal.integrated.fontSize": 15,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "scm.inputFontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "chat.editor.fontFamily": "JetBrainsMono Nerd Font",
+  "debug.console.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.codeLensFontFamily": "JetBrainsMono Nerd Font",
+  "notebook.output.fontFamily": "JetBrainsMono Nerd Font",
+  "markdown.preview.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.inlayHints.fontFamily": "JetBrainsMono Nerd Font",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.inlineSuggest.enabled": true,
+  "scm.alwaysShowRepositories": true,
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  // apc
+  // "apc.activityBar": {
+  //   "position": "bottom",
+  //   "hideSettings": true,
+  //   "size": 28
+  // },
+  // "apc.electron": {
+  //   "titleBarStyle": "hiddenInset",
+  //   "trafficLightPosition": {
+  //     "x": 12,
+  //     "y": 10
+  //   }
+  // },
+  "apc.font.family": "JetBrainsMono Nerd Font",
+  "apc.monospace.font.family": "JetBrainsMono Nerd Font",
+  // "apc.statusBar": {
+  //   "position": "editor-bottom",
+  //   "height": 28,
+  //   "fontSize": 12
+  // },
+  // tokyo night
+  "workbench.colorCustomizations": {
+    "[Tokyo Night Storm]": {
+      "editor.background": "#1f2335" // "#24283b",
+      // "sideBar.background": "#24283b",
+      // "sideBarTitle.background": "#24283b",
+      // "sideBarSectionHeader.background": "#24283b",
+      // "terminal.background": "#24283b",
+      // "activityBar.background": "#24283b",
+      // "statusBar.background": "#24283b",
+      // "editorGroupHeader.tabsBackground": "#24283b",
+      // "tab.inactiveBackground": "#24283b"
+    }
+  },
+  // vim
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.enableNeovim": true,
+  "vim.neovimPath": "/usr/bin/nvim",
+  "vim.neovimConfigPath": "/home/akbar/.config/nvim/init.lua",
+  "vim.neovimUseConfigFile": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false
+  },
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["leader", "w"],
+      "commands": ["workbench.action.files.save"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // switch buffer/window
+    {
+      "before": ["<S-h>"],
+      "commands": [":bp"]
+    },
+    {
+      "before": ["<S-l>"],
+      "commands": [":bn"]
+    },
+    // split window
+    {
+      "before": ["leader", "-"],
+      "commands": [":split"]
+    },
+    {
+      "before": ["leader", "/"],
+      "commands": [":vsplit"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "after": ["d", "d"]
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["lineBreakInsert"],
+      "silent": true
+    },
+    // switch pane
+    {
+      "before": ["leader", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["leader", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["leader", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["leader", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    // close tab
+    {
+      "before": ["<leader>", "c"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    // find in files
+    // {
+    //   "before": [
+    //     "<leader>",
+    //     "f"
+    //   ],
+    //   "commands": [
+    //     "workbench.action.findInFiles"
+    //   ]
+    // },
+    // toggle sidebar
+    {
+      "before": ["<leader>", "b"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    // toggle terminal
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.terminal.toggleTerminal"]
+    },
+    // toggle quick open
+    {
+      "before": ["leader", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    // undo close window
+    {
+      "before": ["leader", "u"],
+      "commands": ["workbench.action.reopenClosedEditor"]
+    },
+    // mark next/prev
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.next"]
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.prev"]
+    },
+    // code runner
+    {
+      "before": ["<leader>", "r"],
+      "commands": ["code-runner.run"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    // Stay in visual mode while indenting
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    },
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    // Move selected lines while staying in visual mode
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    }
+  ],
+  "editor.lineNumbers": "relative",
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true,
+  "editor.fontVariations": false,
+  "editor.fontLigatures": false,
+  //"editor.fontFamily": "JetBrains Mono, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.language.colorizedBracketPairs": [],
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.guides.bracketPairs": true,
+  "chat.editor.fontSize": 13,
+  "chat.experimental.quickQuestion.enable": true,
+  "terminal.integrated.env.linux": {},
+  "eslint.codeActionsOnSave.rules": null,
+  "editor.minimap.enabled": false,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "gitlens.views.worktrees.files.layout": "list",
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": true,
+    "scminput": false
+  },
+  "window.menuBarVisibility": "toggle",
+  "window.density.editorTabHeight": "compact",
+  "vscord.status.problems.enabled": false,
+  "vscord.status.details.text.notInFile": "",
+  "vscord.app.id": "",
+  "vscord.status.state.enabled": true,
+  "window.commandCenter": false,
+  "terminal.integrated.experimentalInlineChat": true,
+  "workbench.colorTheme": "Everforest Dark",
+  "gitlens.ai.experimental.provider": "openai",
+  "gitlens.ai.experimental.openai.model": "gpt-4-turbo-preview",
+  "vscord.status.state.text.viewing": "Viewing some stuff",
+  "vscord.status.state.text.idle": "Chillin",
+  "vscord.status.details.text.idle": "Chillin",
+  "vscord.app.privacyMode.enable": true,
+  "vscord.status.details.text.viewing": "Working on some stuff",
+  "vscord.status.details.text.editing": "Working on some stuff",
+  "vscord.status.showElapsedTime": false,
+  "vscord.status.idle.check": false,
+  "vscord.status.idle.enabled": false,
+  "vscord.status.details.idle.enabled": false,
+  "vscord.status.state.idle.enabled": false,
+  "vscord.status.details.enabled": false,
+  "vscord.status.state.text.editing": "Editing some stuff",
+  "window.titleBarStyle": "custom"
+}
