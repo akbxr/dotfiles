@@ -59,7 +59,9 @@ return {
       git_commit_text = "Committing changes", -- Format string rendered when committing changes in git (either string or function(filename: string): string)
       plugin_manager_text = "Managing plugins", -- Format string rendered when managing plugins (either string or function(plugin_manager_name: string): string)
       reading_text = "Reading", -- Format string rendered when a read-only or unmodifiable file is loaded in the buffer (either string or function(filename: string): string)
-      workspace_text = DISABLE, -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
+      workspace_text = function()
+        return nil
+      end, -- Format string rendered when in a git repository (either string or function(project_name: string|nil, filename: string): string)
       line_number_text = "Line %s out of %s", -- Format string rendered when `enable_line_number` is set to true (either string or function(line_number: number, line_count: number): string)
     },
   },
@@ -125,6 +127,33 @@ return {
       },
     },
     -- See Commands section for default commands if you want to lazy load on them
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        eslint = {
+          settings = {
+            useFlatConfig = false, -- set if using flat config
+            experimental = {
+              useFlatConfig = nil, -- option not in the latest eslint-lsp
+            },
+          },
+        },
+      },
+      setup = {
+        eslint = function()
+          require("lazyvim.util").lsp.on_attach(function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            elseif client.name == "tsserver" or client.name == "vtsls" then
+              client.server_capabilities.documentFormattingProvider = false
+            end
+          end)
+        end,
+      },
+    },
   },
 
   {
