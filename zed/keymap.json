@@ -1,9 +1,54 @@
 [
-  // remap jj in insert mode to escape.
   {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
       "j j": "vim::NormalBefore" // remap jj in insert mode to escape.
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "space w": "workspace::Save",
+      "space e": "workspace::ToggleLeftDock",
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "shift-k": "editor::MoveLineUp",
+      "shift-j": "editor::MoveLineDown",
+      "shift-h": "pane::GoBack",
+      "shift-l": "pane::GoForward",
+      "space c": "pane::CloseActiveItem",
+      "space d": "editor::GoToDiagnostic",
+      "spcae D": "editor::GoToPrevDiagnostic",
+      "space \\": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "n": "project_panel::NewFile",
+      "shift-n": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": ["project_panel::Trash", { "skip_prompt": false }],
+      "c": "project_panel::Copy",
+      "v": "project_panel::Paste",
+      "cmd-x": "project_panel::Cut",
+      "shift-f": "project_panel::NewSearchInDirectory"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-n": "workspace::NewTerminal",
+      "cmd-d": "pane::CloseActiveItem",
+      "cmd-shift-f": "workspace::ToggleZoom",
+      "escape": "workspace::ToggleBottomDock"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-t": "workspace::NewTerminal",
+      "ctrl-cmd-e": "project_panel::ToggleFocus",
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"]
     }
   }
 ]
