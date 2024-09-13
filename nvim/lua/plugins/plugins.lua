@@ -3,6 +3,140 @@ return {
   { "CRAG666/code_runner.nvim", config = true },
 
   {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      -- add any opts here
+      ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+      provider = "copilot",
+      copilot = {
+        endpoint = "https://api.githubcopilot.com",
+        model = "gpt-4o-2024-05-13",
+        proxy = nil, -- [protocol://]host[:port] Use this proxy
+        allow_insecure = false, -- Allow insecure server connections
+        timeout = 30000, -- Timeout in milliseconds
+        temperature = 0,
+        max_tokens = 16384,
+      },
+      behaviour = {
+        auto_suggestions = false, -- Experimental stage
+        auto_set_highlight_group = true,
+        auto_set_keymaps = true,
+        auto_apply_diff_after_generation = false,
+        support_paste_from_clipboard = false,
+      },
+      mappings = {
+        --- @class AvanteConflictMappings
+        diff = {
+          ours = "co",
+          theirs = "ct",
+          all_theirs = "ca",
+          both = "cb",
+          cursor = "cc",
+          next = "]x",
+          prev = "[x",
+        },
+        suggestion = {
+          accept = "<M-l>",
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
+        },
+        jump = {
+          next = "]]",
+          prev = "[[",
+        },
+        submit = {
+          normal = "<CR>",
+          insert = "<C-s>",
+        },
+        ask = "<leader>av",
+        edit = "<leader>ae",
+        refresh = "<leader>ar",
+        toggle = {
+          default = "<leader>at",
+          debug = "<leader>ad",
+          hint = "<leader>ah",
+          suggestion = "<leader>as",
+        },
+      },
+      hints = { enabled = true },
+      windows = {
+        ---@type "right" | "left" | "top" | "bottom"
+        position = "right", -- the position of the sidebar
+        wrap = true, -- similar to vim.o.wrap
+        width = 30, -- default % based on available width
+        sidebar_header = {
+          align = "center", -- left, center, right for title
+          rounded = true,
+        },
+      },
+      highlights = {
+        ---@type AvanteConflictHighlights
+        diff = {
+          current = "DiffText",
+          incoming = "DiffAdd",
+        },
+      },
+      --- @class AvanteConflictUserConfig
+      diff = {
+        autojump = true,
+        ---@type string | fun(): any
+        list_opener = "copen",
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
+
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<D-l>",
+        },
+      })
+    end,
+  },
+
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
@@ -39,6 +173,94 @@ return {
   },
 
   {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    cmd = "CopilotChat",
+    opts = {
+      model = "gpt-4o-2024-08-06",
+      auto_insert_mode = true,
+      window = {
+        width = 0.4,
+      },
+      selection = function(source)
+        local select = require("CopilotChat.select")
+        return select.visual(source) or select.buffer(source)
+      end,
+    },
+    keys = {
+      {
+        "<leader>aa",
+        function()
+          return require("CopilotChat").toggle()
+        end,
+        desc = "Toggle (CopilotChat)",
+      },
+      {
+        "<leader>ax",
+        function()
+          return require("CopilotChat").clear()
+        end,
+        desc = "Clear (CopilotChat)",
+      },
+      {
+        "<leader>aq",
+        function()
+          local input = vim.fn.input("Quick Chat: ")
+          if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+          end
+        end,
+        desc = "Quick Chat (CopilotChat)",
+      },
+    },
+    init = function()
+      LazyVim.on_load("which-key.nvim", function()
+        vim.schedule(function()
+          require("which-key").register({ a = { name = "+CopilotChat (AI)" } }, { prefix = "<leader>" })
+        end)
+      end)
+    end,
+    config = function(_, opts)
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "copilot-chat",
+        callback = function()
+          vim.opt_local.relativenumber = false
+          vim.opt_local.number = false
+        end,
+      })
+      require("CopilotChat").setup(opts)
+    end,
+  },
+
+  {
+
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        eslint = {
+          settings = {
+            useFlatConfig = false, -- set if using flat config
+            experimental = {
+              useFlatConfig = nil, -- option not in the latest eslint-lsp
+            },
+          },
+        },
+      },
+      setup = {
+        eslint = function()
+          require("lazyvim.util").lsp.on_attach(function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            elseif client.name == "tsserver" or client.name == "vtsls" then
+              client.server_capabilities.documentFormattingProvider = false
+            end
+          end)
+        end,
+      },
+    },
+  },
+
+  {
     "andweeb/presence.nvim",
     opts = {
       auto_update = true, -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
@@ -66,95 +288,18 @@ return {
     },
   },
 
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = {
-      debug = false, -- Enable debugging
-      show_help = true, -- Show help message on start
-
-      window = {
-        layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
-        width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
-        height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
-        -- Options below only apply to floating windows
-        relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
-        border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        row = nil, -- row position of the window, default is centered
-        col = nil, -- column position of the window, default is centered
-        title = "Copilot Chat", -- title of chat window
-        footer = nil, -- footer of chat window
-        zindex = 1, -- determines if window is on top or below other floating windows
-      },
-
-      mappings = {
-        complete = {
-          detail = "Use @<Tab> or /<Tab> for options.",
-          insert = "<Tab>",
-        },
-        close = {
-          normal = "q",
-          insert = "<C-c>",
-        },
-        reset = {
-          normal = "<C-l>",
-          insert = "<C-l>",
-        },
-        submit_prompt = {
-          normal = "<CR>",
-          insert = "<C-m>",
-        },
-        accept_diff = {
-          normal = "<C-y>",
-          insert = "<C-y>",
-        },
-        yank_diff = {
-          normal = "gy",
-        },
-        show_diff = {
-          normal = "gd",
-        },
-        show_system_prompt = {
-          normal = "gp",
-        },
-        show_user_selection = {
-          normal = "gs",
-        },
-      },
-    },
-    -- See Commands section for default commands if you want to lazy load on them
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        eslint = {
-          settings = {
-            useFlatConfig = false, -- set if using flat config
-            experimental = {
-              useFlatConfig = nil, -- option not in the latest eslint-lsp
-            },
-          },
-        },
-      },
-      setup = {
-        eslint = function()
-          require("lazyvim.util").lsp.on_attach(function(client)
-            if client.name == "eslint" then
-              client.server_capabilities.documentFormattingProvider = true
-            elseif client.name == "tsserver" or client.name == "vtsls" then
-              client.server_capabilities.documentFormattingProvider = false
-            end
-          end)
-        end,
-      },
-    },
-  },
+  -- {
+  --   "rmagatti/auto-session",
+  --   lazy = false,
+  --   dependencies = {
+  --     "nvim-telescope/telescope.nvim", -- Only needed if you want to use sesssion lens
+  --   },
+  --   config = function()
+  --     require("auto-session").setup({
+  --       auto_session_suppress_dirs = { "~/", "~/Code", "~/Downloads", "/" },
+  --     })
+  --   end,
+  -- },
 
   {
     "hrsh7th/nvim-cmp",
