@@ -116,6 +116,15 @@ source $ZSH/oh-my-zsh.sh
 
 # nvim
 alias nv=nvim
+alias lvim="NVIM_APPNAME=LazyVim nvim"
+alias av="NVIM_APPNAME=AstroVim nvim"
+alias nvc="NVIM_APPNAME=NvChad nvim"
+alias kc="NVIM_APPNAME=kickstart nvim"
+
+# pnpm
+alias pn=pnpm
+alias px=pnpx
+alias pna=pnpm add
 
 # lazygit
 alias lg=lazygit
