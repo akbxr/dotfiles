@@ -11,6 +11,7 @@
       "space w": "workspace::Save",
       "space e": "workspace::ToggleLeftDock",
       "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
       "shift-k": "editor::MoveLineUp",
       "shift-j": "editor::MoveLineDown",
       "shift-h": "pane::GoBack",
