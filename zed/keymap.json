@@ -6,7 +6,7 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal && !menu",
+    "context": "Editor && VimControl && !menu",
     "bindings": {
       "space w": "workspace::Save",
       "space e": "workspace::ToggleLeftDock",
