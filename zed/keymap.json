@@ -14,12 +14,37 @@
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
       "shift-k": "editor::MoveLineUp",
       "shift-j": "editor::MoveLineDown",
-      "shift-h": "pane::GoBack",
-      "shift-l": "pane::GoForward",
-      "space c": "pane::CloseActiveItem",
-      "space d": "editor::GoToDiagnostic",
-      "spcae D": "editor::GoToPrevDiagnostic",
+      "shift-h": ["workspace::SendKeystrokes", "ctrl-pageup"],
+      "shift-l": ["workspace::SendKeystrokes", "ctrl-pagedown"],
+      "space q": "pane::CloseActiveItem",
+      "]d": "editor::GoToDiagnostic",
+      "[d": "editor::GoToPrevDiagnostic",
+      "space d": "diagnostics::Deploy",
+      // "space g": ["task::Spawn", { "task_name": "lazygit" }],
       "space \\": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      // ... or other keybindings
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "cmd-shift-i": "assistant::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-k": "editor::ContextMenuPrev",
+      "ctrl-j": "editor::ContextMenuNext"
     }
   },
   {
@@ -41,7 +66,15 @@
       "cmd-n": "workspace::NewTerminal",
       "cmd-d": "pane::CloseActiveItem",
       "cmd-shift-f": "workspace::ToggleZoom",
-      "escape": "workspace::ToggleBottomDock"
+      "escape": "workspace::ToggleBottomDock",
+      "shift-h": ["workspace::SendKeystrokes", "cmd-{"],
+      "shift-l": ["workspace::SendKeystrokes", "cmd-}"]
+    }
+  },
+  {
+    "context": "AssistantPanel",
+    "bindings": {
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"]
     }
   },
   {
@@ -49,7 +82,15 @@
     "bindings": {
       "ctrl-shift-t": "workspace::NewTerminal",
       "ctrl-cmd-e": "project_panel::ToggleFocus",
+      // "alt-g": ["task::Spawn", { "task_name": "lazygit" }],
       "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"]
+    }
+  },
+
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-shift-f": "project_panel::NewSearchInDirectory"
     }
   }
 ]
