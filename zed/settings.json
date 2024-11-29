@@ -7,6 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "show_inline_completions": false,
   "language_models": {
     "anthropic": {
       "version": "1"
@@ -23,8 +24,8 @@
   },
   "line_indicator_format": "long",
   "vim_mode": true,
-  "ui_font_size": 14,
-  "buffer_font_size": 14,
+  "ui_font_size": 14.5,
+  "buffer_font_size": 14.5,
   "show_copilot_suggestions": true,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "ui_font_family": "JetBrainsMono Nerd Font",
@@ -33,11 +34,7 @@
   "tab_size": 2,
   "shell": "zsh",
   "vim": {
-    // "always": use system clipboard
-    // "never": don't use system clipboard
-    // "on_yank": use system clipboard for yank operations
     "use_system_clipboard": "always",
-    // leader key
     "leader": "space",
     // Lets `f` and `t` motions extend across multiple lines
     "use_multiline_find": true
@@ -69,24 +66,47 @@
   //   "**/.classpath",
   //   "**/.settings"
   // ],
+  // "show_inline_completions": false,
   "features": {
     "inline_completion_provider": "supermaven"
   },
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
+      "provider": "copilot_chat",
+      "model": "claude-3-5-sonnet"
     },
-    "dock": "left",
+    "dock": "right",
     "version": "2",
-    "provider": null
+    "default_width": 500,
+    "provider": null,
+    "enable_experimental_live_diffs": true
+  },
+  "inlay_hints": {
+    "enabled": false,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": false,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50
+  },
+  "slash_commands": {
+    // Settings for the `/docs` slash command.
+    "docs": {
+      // Whether `/docs` is enabled.
+      "enabled": true
+    },
+    // Settings for the `/project` slash command.
+    "project": {
+      // Whether `/project` is enabled.
+      "enabled": true
+    }
   },
   "lsp": {
     "discord_presence": {
       "initialization_options": {
         // Base url for all language icons
         "base_icons_url": "https://raw.githubusercontent.com/xhyrom/zed-discord-presence/main/assets/icons/",
-
         "state": "Writing new bugs",
         "details": null,
         // URL for large image
@@ -95,14 +115,12 @@
         // URL for small image
         "small_image": "{base_icons_url}/zed.png",
         "small_text": "Zed",
-
         // Rules - disable presence in some workspaces
         "rules": {
           "mode": "blacklist", // or whitelist
           "paths": ["absolute path"]
         },
-
-        "git_integration": true
+        "git_integration": false
       }
     }
   }
