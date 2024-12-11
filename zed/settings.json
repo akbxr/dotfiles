@@ -8,6 +8,12 @@
 // from the command palette or from `Zed` application menu.
 {
   "show_inline_completions": false,
+  "terminal": {
+    "line_height": "standard",
+    "toolbar": {
+      "breadcrumbs": false
+    }
+  },
   "language_models": {
     "anthropic": {
       "version": "1"
