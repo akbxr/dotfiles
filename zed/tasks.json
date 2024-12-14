@@ -14,5 +14,13 @@
     "use_new_terminal": false,
     "reveal": "always",
     "hide": "on_success"
+  },
+  {
+    "label": "Git diff staged",
+    "command": "git diff --staged | tee >(wc -l | pbcopy) | cat",
+    "reveal": "never",
+    "shell": "system",
+    "hide": "never",
+    "show_command": true
   }
 ]
