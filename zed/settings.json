@@ -19,6 +19,17 @@
       "version": "1"
     }
   },
+  "project_panel": {
+    "show_diagnostics": "all",
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+  "tabs": {
+    "show_diagnostics": "all",
+    "file_icons": true,
+    "git_status": true
+  },
   "theme": "Tokyo Night Storm",
   "experimental.theme_overrides": {
     "editor.background": "#1f2335",
