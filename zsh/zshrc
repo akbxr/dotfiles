@@ -116,15 +116,6 @@ source $ZSH/oh-my-zsh.sh
 
 # nvim
 alias nv=nvim
-alias lvim="NVIM_APPNAME=LazyVim nvim"
-alias av="NVIM_APPNAME=AstroVim nvim"
-alias nvc="NVIM_APPNAME=NvChad nvim"
-alias kc="NVIM_APPNAME=kickstart nvim"
-
-# pnpm
-alias pn=pnpm
-alias px=pnpx
-alias pna=pnpm add
 
 # lazygit
 alias lg=lazygit
@@ -132,9 +123,15 @@ alias lg=lazygit
 
 alias lvim="NVIM_APPNAME=LazyVim nvim"
 alias av="NVIM_APPNAME=AstroVim nvim"
+alias nvc="NVIM_APPNAME=NvChad nvim"
+alias kc="NVIM_APPNAME=kickstart nvim"
+alias pn=pnpm
+alias px=pnpx
+alias pna=pn add
+alias pnr=pn run
 
 function nvims() {
-  items=("LazyVim" "AstroVim")
+  items=("LazyVim" "AstroVim" "NvChad" "kickstart")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -145,6 +142,48 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
+function tmuxs() {
+  items=("New Session" $(tmux list-sessions -F "#S" 2>/dev/null))
+  selected_session=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Tmux Session  " --height=~50% --layout=reverse --border --exit-0)
+
+  if [[ -z $selected_session ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $selected_session == "New Session" ]]; then
+    read -p "Enter new session name: " session_name
+    if [[ -z $session_name ]]; then
+      echo "Session name cannot be empty"
+      return 1
+    fi
+    tmux new-session -s "$session_name"
+  else
+    tmux attach-session -t "$selected_session"
+  fi
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# mysql
+export PATH=${PATH}:/usr/local/mysql/bin/
+alias mysql=/usr/local/mysql/bin/mysql
+
+# github-cli and git
+alias ghpr="gh pr list"
+alias grao="git remote add origin"
+
+# air
+alias air='~/go/bin/air'
+
+# bun completions
+[ -s "/Users/akbar/.bun/_bun" ] && source "/Users/akbar/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PATH=$PATH:/opt/homebrew/bin/lazygit
+
+# bin
+export PATH="$HOME/bin:$PATH"
